@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <title>
+    How to use simple API using AJAX ?
+  </title>
+</head>
+<body>
+  <script>
+    $(document).ready(() => {
+      getAllData()
+    })
+
+    /*
+      Get all data from API
+    */
+    function getAllData(){
+      $.ajax({
+        method: "GET",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People.json',
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+
+    /*
+      Get detail data from API by unique ID
+      - To use: 
+          arrayData = Object.keys(data);
+          console.log(arrayData)
+          for(var i = 0; i<arrayData.length; i++){
+            getDetailData(arrayData[i])
+          }
+    */
+    function getDetailData(id){
+      $.ajax({
+        method: "GET",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People/'+id+'.json',
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+    
+    /*
+      Add new data to DB (Firebase) through API
+      For example of new data: data = JSON.stringify({Name: 'Minh Thien' })
+    */
+    function addData(newData){
+      $.ajax({
+        method: "POST",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People.json',
+        data: newData,
+        dataType: "json",
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+    // Or 
+    function addData(){
+      $.ajax({
+        method: "POST",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People.json',
+        data: JSON.stringify({Name: 'Minh Thien 07062022' }),
+        dataType: "json",
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+
+    /*
+      Delete all data of DB (Firebase) through API
+    */
+    function deleteAllData(){
+      $.ajax({
+        method: "DELETE",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People.json',
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+
+    /*
+      Delete specify data of DB (Firebase) through API by ID
+    */
+    function deleteData(id){
+      $.ajax({
+        method: "DELETE",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People'+id+'.json',
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+
+    /*
+      Update data of DB (Firebase) through API by ID 
+      NOTE: can use PUT or PATCH to doing this, for more information follow this: https://www.geeksforgeeks.org/difference-between-put-and-patch-request/
+    */
+    function updateData(id){
+      $.ajax({
+        method: "PUT",
+        url: 'https://fake-api-1c56b-default-rtdb.firebaseio.com/People/'+id+'.json',
+        data: JSON.stringify({Name: 'Doan Ngoc Thien'}),
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      })
+    }
+  </script>
+</body>
+</html>
